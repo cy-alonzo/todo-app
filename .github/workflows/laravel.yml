@@ -28,7 +28,7 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
       run: |
-        **sudo systemctl start mysql** mysql -uroot -proot < databases/tracker/create_databases.sql
+        sudo systemctl start mysql
         sudo mysql --user=root --password=root
         sudo mysql 'CREATE DATABASE laravel;'
         sudo mysql 'SHOW DATABASES;'
