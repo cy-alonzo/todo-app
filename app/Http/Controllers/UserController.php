@@ -48,6 +48,6 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
-        return response()->json($user);
+        return response()->json(['user' => $user, 'message' => 'Hello!']);
     }
 }

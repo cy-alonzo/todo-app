@@ -101,4 +101,14 @@ class ExampleTest extends TestCase
             'updated_at'
         ]);
     }
+
+    public function test_add_user()
+    {
+        $response = $this->post('/api/users', ['name' => 'John Doe', 'email' => 'johnny@mail.com', 'password' => 'password']);
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure([
+            'user',
+            'message'
+        ]);
+    }
 }
