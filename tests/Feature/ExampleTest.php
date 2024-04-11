@@ -82,6 +82,12 @@ class ExampleTest extends TestCase
         $response->assertJsonPath('name', 'John Doe');
     }
 
+    public function test_user_user_not_found()
+    {
+        $response = $this->get('/api/users/200');
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
+    }
+
     public function test_delete_user()
     {
         $response = $this->delete('/api/users/2');
