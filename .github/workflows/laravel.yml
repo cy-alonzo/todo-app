@@ -28,7 +28,7 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
       run: |
-        sudo apt install mysql-server
+        **sudo systemctl start mysql** mysql -uroot -proot < databases/tracker/create_databases.sql
         sudo mysql --user=root --password=root
         sudo mysql 'CREATE DATABASE laravel;'
         sudo mysql 'SHOW DATABASES;'
@@ -41,5 +41,5 @@ jobs:
         DB_PORT: 3306
         DB_DATABASE: laravel
         DB_USERNAME: root
-        DB_PASSWORD: password
+        DB_PASSWORD: root
       run: php artisan test
