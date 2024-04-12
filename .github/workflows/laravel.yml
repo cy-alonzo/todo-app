@@ -37,7 +37,7 @@ jobs:
     - name: Create Database
       run: |
         sudo systemctl start mysql
-        sudo mysql -user="root" --password="root"
+        sudo mysql --user="root" --password="root"
         mysql 'CREATE DATABASE laravel;'
         mysql 'SHOW DATABASES;'
     - name: Execute migration and seeder
