@@ -51,7 +51,7 @@ jobs:
     - name: Execute Tests
       env:
         DB_CONNECTION: mysql
-        DB_HOST: localhost
+        DB_HOST: mysql
         DB_DATABASE: Laravel
         DB_PORT: 33306
         DB_USER: root
