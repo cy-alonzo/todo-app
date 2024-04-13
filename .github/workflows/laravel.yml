@@ -48,6 +48,12 @@ jobs:
     - name: Generate application key
       run: php artisan key:generate
 
+    - name: Execute Database migration
+      run: php artisan migrate
+
+    - name: Execute seeder
+      run: php artisan db:seed
+
     - name: Install Laravel API
       run: php artisan install:api
   
