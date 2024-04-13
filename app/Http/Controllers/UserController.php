@@ -8,8 +8,18 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->name) {
+            return response()->json([
+                'users' => User::where(
+                    'name',
+                    'like',
+                    '%' . $request->name . '%'
+                )->get()
+            ]);
+        }
+
         return response()->json(['users' => User::all()]);
     }
 

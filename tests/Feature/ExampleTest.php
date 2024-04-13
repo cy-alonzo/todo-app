@@ -54,6 +54,24 @@ class ExampleTest extends TestCase
         ]);
     }
 
+    public function test_search_user_by_name()
+    {
+        $response = $this->get('/api/users?name=Test');
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure([
+            'users' => [
+                '*' => [
+                    'id',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'created_at',
+                    'updated_at'
+                ]
+            ]
+        ]);
+    }
+
     public function test_user_not_found()
     {
         $response = $this->get('/api/users/110');
