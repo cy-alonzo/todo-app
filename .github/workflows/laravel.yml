@@ -40,22 +40,22 @@ jobs:
       run: php artisan key:generate
 
     - name: Execute Tests
-      run: |
-        sed -i 's/DB_CONNECTION=localhost`/DB_CONNECTION=mysql/g' .env
-        sed -i 's/DB_HOST=localhost/DB_HOST=mysql/g' .env
-        sed -i 's/DB_PORT=3306/DB_PORT=3306/g' .env
-        sed -i 's/DB_DATABASE=Laravel/DB_DATABASE=Laravel/g' .env
-        sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' .env
-        sed -i 's/DB_PASSWORD=password/DB_PASSWORD=password/g' .env
-        php artisan migrate:fresh --seed
-        php artisan test
-      # env:
-      #   DB_CONNECTION: mysql
-      #   DB_HOST: mysql
-      #   DB_DATABASE: Laravel
-      #   DB_PORT: 33306
-      #   DB_USER: root
-      #   DB_PASSWORD: password
       # run: |
+      #   sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=mysql/g' .env
+      #   sed -i 's/DB_HOST=localhost/DB_HOST=mysql/g' .env
+      #   sed -i 's/DB_PORT=3306/DB_PORT=3306/g' .env
+      #   sed -i 's/DB_DATABASE=Laravel/DB_DATABASE=Laravel/g' .env
+      #   sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' .env
+      #   sed -i 's/DB_PASSWORD=password/DB_PASSWORD=password/g' .env
       #   php artisan migrate:fresh --seed
       #   php artisan test
+      env:
+        DB_CONNECTION: mysql
+        DB_HOST: mysql
+        DB_DATABASE: Laravel
+        DB_PORT: 33306
+        DB_USER: root
+        DB_PASSWORD: password
+      run: |
+        php artisan migrate:fresh --seed
+        php artisan test
