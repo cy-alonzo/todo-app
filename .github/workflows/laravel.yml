@@ -51,11 +51,11 @@ jobs:
     - name: Execute Tests
       env:
         DB_CONNECTION: mysql
+        DB_HOST: 127.0.0.1
         DB_DATABASE: Laravel
         DB_PORT: 33306
         DB_USER: root
         DB_PASSWORD: password
       run: |
-        php artisan install:api
         php artisan migrate:fresh --seed
         php artisan test
