@@ -51,7 +51,7 @@ jobs:
       #   php artisan test
       env:
         DB_CONNECTION: mysql
-        DB_HOST: mysql
+        DB_HOST: 127.0.0.1
         DB_DATABASE: Laravel
         DB_PORT: 3306
         DB_USER: root
