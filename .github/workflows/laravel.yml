@@ -8,48 +8,47 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
 
-  services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: Laravel
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    services:
+        mysql:
+          image: mysql:5.7
+          env:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: Laravel
+            MYSQL_USER: root
+            MYSQL_PASSWORD: password
+          ports:
+            - 3306:3306
+          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.3'
-        extensions: mbstring, dom, curl, openssl, pdo, tokenizer, json, xml, ctype, zip
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom, curl, openssl, pdo, tokenizer, json, xml, ctype, zip
 
-    - name: Install Composer dependencies
-      run: composer install --no-progress --no-suggest --no-interaction
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest --no-interaction
 
-    - name: Create environment file
-      run: cp .env.example .env
+      - name: Create environment file
+        run: cp .env.example .env
 
-    - name: Set up database configuration
-      run: |
-        sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=mysql/g' .env
-        sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/g' .env
-        sed -i 's/DB_PORT=3306/DB_PORT=3306/g' .env
-        sed -i 's/DB_DATABASE=laravel/DB_DATABASE=Laravel/g' .env
-        sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' .env
-        sed -i 's/DB_PASSWORD=/DB_PASSWORD=password/g' .env
+      - name: Set up database configuration
+        run: |
+          sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=mysql/g' .env
+          sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/g' .env
+          sed -i 's/DB_PORT=3306/DB_PORT=3306/g' .env
+          sed -i 's/DB_DATABASE=laravel/DB_DATABASE=Laravel/g' .env
+          sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' .env
+          sed -i 's/DB_PASSWORD=/DB_PASSWORD=password/g' .env
 
-    - name: Generate application key
-      run: php artisan key:generate
+      - name: Generate application key
+        run: php artisan key:generate
 
-    - name: Run Laravel HTTP tests
-      run: php artisan test
+      - name: Run Laravel HTTP tests
+        run: php artisan test
