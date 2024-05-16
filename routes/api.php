@@ -14,4 +14,6 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/', [UserController::class, 'store']);
     Route::patch('/{id}', [UserController::class, 'edit']);
     Route::delete('/{id}', [UserController::class, 'delete']);
+
+    Route::post('/new-users', [UserController::class, 'new']);
 });

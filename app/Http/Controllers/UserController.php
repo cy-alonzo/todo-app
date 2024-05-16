@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,15 +11,15 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->name) {
-            return response()->json([
-                'users' => User::where(
-                    'name',
-                    'like',
-                    '%' . $request->name . '%'
-                )->get()
-            ]);
-        }
+        // if ($request->name) {
+        //     return response()->json([
+        //         'users' => User::where(
+        //             'name',
+        //             'like',
+        //             '%' . $request->name . '%'
+        //         )->get()
+        //     ]);
+        // }
 
         return response()->json(['users' => User::all()]);
     }
@@ -49,7 +50,7 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         User::create([
             'name'      => $request->name,
@@ -59,5 +60,10 @@ class UserController extends Controller
 
         $user = User::where('email', $request->email)->first();
         return response()->json(['user' => $user, 'message' => 'Hello!']);
+    }
+
+    public function new()
+    {
+        return response()->json(['message' => 'Hello world!']);
     }
 }
